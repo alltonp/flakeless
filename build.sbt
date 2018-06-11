@@ -17,30 +17,25 @@ unmanagedSourceDirectories in Test += baseDirectory.value / "src" / "example" / 
 
 libraryDependencies ++= Seq(
   //TIP: although it looks like more could be provided, it seems they can't...
-
   "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
-  "im.mange"          %% "little"             % "[0.0.57,0.0.999]", // % "provided",
-
-  "org.json4s"     %% "json4s-native" % "3.2.11"// % "provided"
-//    exclude("org.scala-lang", "scala-compiler")
-//    exclude("org.scala-lang", "scalap")
-    exclude("joda-time", "joda-time")
-  ,
-
-  "org.json4s"     %% "json4s-ext"    % "3.2.11"// % "provided"
-    exclude("joda-time", "joda-time")
-  ,
+  "im.mange" %% "little" % "[0.0.57,0.0.999]", 
+  "org.json4s" %% "json4s-native" % "3.6.0-M4",
+  "org.json4s" %% "json4s-ext" % "3.6.0-M4",
 
   //TODO: I suspect this also should not be provided ...
-  "com.github.nscala-time" %% "nscala-time" % "[2.16.0,2.99.99]" % "provided"//,
+  "com.github.nscala-time" %% "nscala-time" % "[2.16.0,2.99.99]" % "provided",
+
+  "org.specs2" %% "specs2-core" % "3.9.5" % "test"
 
 )
 
+import xerial.sbt.Sonatype._
+
 sonatypeSettings
 
-publishTo <<= version { project_version ⇒
+publishTo := {
   val nexus = "https://oss.sonatype.org/"
-  if (project_version.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
@@ -52,7 +47,7 @@ publishArtifact in Test := false
 
 homepage := Some(url("https://github.com/alltonp/flakeless"))
 
-licenses +=("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
+licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0.html"))
 
 credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv("SONATYPE_USER"), System.getenv("SONATYPE_PASSWORD"))
 
