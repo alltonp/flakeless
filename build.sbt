@@ -31,9 +31,7 @@ libraryDependencies ++= Seq(
     exclude("joda-time", "joda-time")
   ,
 
-  //TODO: I suspect this also should not be provided ...
-  "com.github.nscala-time" %% "nscala-time" % "[2.16.0,2.99.99]" % "provided"//,
-
+  "com.github.nscala-time" %% "nscala-time" % "2.18.0"// % "provided"//,
 )
 
 sonatypeSettings
