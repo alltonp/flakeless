@@ -1,6 +1,5 @@
 <a href="https://travis-ci.org/alltonp/flakeless" target="_blank"><img src="https://travis-ci.org/alltonp/flakeless.png?branch=master"></a>
 
-
 # Flakeless - light touch, flake free browser testing in scala
 
 ### What is it?
@@ -30,11 +29,12 @@
 
 ### Installing
 
-Add the following lines to your build.sbt (click on the 'build passing' link above to get the version number)
+Add the following lines to your build.sbt (click on the 'build passing' link above to get the version number or go [here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22im.mange%22))
 
     resolvers += "Sonatype Repo" at "http://oss.sonatype.org/content/groups/public/"
 
-    libraryDependencies += "im.mange" %% "flakeless" % "version"
+    libraryDependencies += "im.mange" %% "flakeless" % "latest-version"
+
 
 
 -----
