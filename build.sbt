@@ -33,6 +33,7 @@ libraryDependencies ++= Seq(
 
   "com.github.nscala-time" %% "nscala-time" % "2.18.0"// % "provided"//,
   
+  
 )
 
 sonatypeSettings
