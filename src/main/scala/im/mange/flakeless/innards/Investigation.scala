@@ -1,8 +1,8 @@
 package im.mange.flakeless.innards
 
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 case class Investigation(flightNumber: Int, suite: String, test: String, success: Boolean,
-                         started: Option[DateTime], finished: Option[DateTime],
-                         firstInteraction: Option[DateTime],
+                         started: Option[LocalDateTime], finished: Option[LocalDateTime],
+                         firstInteraction: Option[LocalDateTime],
                          grossDurationMillis: Option[Long], netDurationMillis: Option[Long], dataPointCount: Int)

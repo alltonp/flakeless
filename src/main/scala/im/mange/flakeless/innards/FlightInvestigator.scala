@@ -1,6 +1,6 @@
 package im.mange.flakeless.innards
 
-import org.joda.time.Duration
+import java.time.Duration
 
 private [flakeless] object FlightInvestigator {
   private val investigationByFlightNumber: scala.collection.concurrent.TrieMap[Int, Investigation] =
@@ -25,12 +25,12 @@ private [flakeless] object FlightInvestigator {
     val finished = flightData.dataPoints.reverse.headOption.map(_.when)
 
     val grossDuration = (started, finished) match {
-      case (Some(start), Some(finish)) => Some(new Duration(start, finish).getMillis)
+      case (Some(start), Some(finish)) => Some(Duration.between(start, finish).toMillis)
       case _ => None
     }
 
     val netDuration = (firstInteraction, finished) match {
-      case (Some(start), Some(finish)) => Some(new Duration(start, finish).getMillis)
+      case (Some(start), Some(finish)) => Some(Duration.between(start, finish).toMillis)
       case _ => None
     }
 

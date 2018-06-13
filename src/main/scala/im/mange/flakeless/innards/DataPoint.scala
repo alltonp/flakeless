@@ -1,6 +1,6 @@
 package im.mange.flakeless.innards
 
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
-case class DataPoint(flightNumber: Int, when: DateTime, description: Option[String],
+case class DataPoint(flightNumber: Int, when: LocalDateTime, description: Option[String],
                      command: Option[ReportCommand], context: Context, log: Option[List[String]])
