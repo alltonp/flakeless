@@ -16,7 +16,7 @@ case class Description(actual: Option[(WebElement) => String] = None) {
     }
   }
 
-  def describeActual(webElement: WebElement) = {
+  def describeActual(webElement: WebElement): String = {
     try {
       reallyDescribe(Some(webElement))
     }

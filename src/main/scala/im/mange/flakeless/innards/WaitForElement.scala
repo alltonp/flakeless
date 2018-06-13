@@ -9,6 +9,7 @@ import org.openqa.selenium.{By, WebElement}
 //... other sounds like an Action ...
 //... in which case arr we in Action & Check extends Command land?
 
+//TODO: should this be WaitForCondition
 /* deliberately not private [flakeless] */ object WaitForElement {
   def apply(flakeless: Option[Flakeless], command: Command,
             description: (WebElement) => String,
