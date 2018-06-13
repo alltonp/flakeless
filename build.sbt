@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   //TIP: although it looks like more could be provided, it seems they can't...
 
   "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
-  "im.mange"          %% "little"             % "[0.0.57,0.0.999]", // % "provided",
+  "im.mange"          %% "little"             % "[0.0.57]", // % "provided",
 
   "org.json4s"     %% "json4s-native" % "3.2.11"// % "provided"
 //    exclude("org.scala-lang", "scala-compiler")
