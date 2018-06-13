@@ -25,7 +25,7 @@ libraryDependencies ++= Seq(
     exclude("joda-time", "joda-time")
   ,
 
-    "org.scala-lang" % "scala-reflect"  % scalaVersion.value,
+//    "org.scala-lang" % "scala-reflect"  % scalaVersion.value,
 //  "org.scala-lang" % "scala-compiler" % scalaVersion.value,
 
   //TIP: important these are NOT provided, so clients don't need to specify
