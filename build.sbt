@@ -16,12 +16,12 @@ resolvers ++= Seq(
 unmanagedSourceDirectories in Test += baseDirectory.value / "src" / "example" / "scala"
 
 libraryDependencies ++= Seq(
-  //TIP: always provided
+  //TIP: always provided, so clients can choose
   "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
 
-  //TIP: it's important that these are  is not provided, so clients don't need to specify
-  "com.github.nscala-time" %% "nscala-time" % "2.18.0",// % "provided"//,
-  "im.mange"               %% "little"      % "0.0.57", // % "provided",
+  //TIP: important these are NOT provided, so clients don't need to specify
+  "com.github.nscala-time" %% "nscala-time" % "2.18.0",
+  "im.mange"               %% "little"      % "0.0.57"
 
   //TIP: shouldn't be needed now, come in from little instead
 //  "org.json4s"     %% "json4s-native" % "3.2.11"// % "provided"
