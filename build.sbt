@@ -16,23 +16,23 @@ resolvers ++= Seq(
 unmanagedSourceDirectories in Test += baseDirectory.value / "src" / "example" / "scala"
 
 libraryDependencies ++= Seq(
-  //TIP: although it looks like more could be provided, it seems they can't...
-
+  //TIP: always provided
   "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
-  "im.mange"          %% "little"             % "[0.0.57]", // % "provided",
 
-  "org.json4s"     %% "json4s-native" % "3.2.11"// % "provided"
-//    exclude("org.scala-lang", "scala-compiler")
-//    exclude("org.scala-lang", "scalap")
-    exclude("joda-time", "joda-time")
-  ,
+  //TIP: it's important that these are  is not provided, so clients don't need to specify
+  "com.github.nscala-time" %% "nscala-time" % "2.18.0",// % "provided"//,
+  "im.mange"               %% "little"      % "0.0.57", // % "provided",
 
-  "org.json4s"     %% "json4s-ext"    % "3.2.11"// % "provided"
-    exclude("joda-time", "joda-time")
-  ,
+  //TIP: shouldn't be needed now, come in from little instead
+//  "org.json4s"     %% "json4s-native" % "3.2.11"// % "provided"
+  //    exclude("org.scala-lang", "scala-compiler")
+  //    exclude("org.scala-lang", "scalap")
+//  exclude("joda-time", "joda-time")
+//  ,
 
-  "com.github.nscala-time" %% "nscala-time" % "2.18.0"// % "provided"//, 
-
+//  "org.json4s"     %% "json4s-ext"    % "3.2.11"// % "provided"
+//  exclude("joda-time", "joda-time")
+//  ,
 )
 
 sonatypeSettings
