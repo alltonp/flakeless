@@ -73,6 +73,10 @@ trait FluentDriver {
     AssertElementUnselected(flakeless, by); this
   }
 
+  def assertUrlEndsWith(expected: String): this.type = {
+    AssertUrlEndsWith(flakeless, expected); this
+  }
+
   def click(by: By): this.type = {
     Click(flakeless, by); this
   }
