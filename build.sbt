@@ -16,14 +16,15 @@ resolvers ++= Seq(
 unmanagedSourceDirectories in Test += baseDirectory.value / "src" / "example" / "scala"
 
 libraryDependencies ++= Seq(
-  //TIP: always provided, so clients can choose
+  //TIP: always 'provided', so clients can upgrade when they choose
   "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
 
-  //TIP: not provided, to avoid rogue milestone releases
+  //TIP: no longer 'provided', to avoid rogue milestone releases
   "org.json4s"     %% "json4s-native" % "3.2.11"
     exclude("joda-time", "joda-time")
   ,
 
+  //test
   "org.scalatest" %% "scalatest" % "3.0.5" % "test"
 )
 
