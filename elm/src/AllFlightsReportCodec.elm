@@ -93,4 +93,4 @@ stringToBool value =
 --decodeDataPointContext =
 --    Json.Decode.Pipeline.decode Context
 --        |> Json.Decode.Pipeline.required "failures" (Json.Decode.list Json.Decode.string)
---        |> Json.Decode.Pipeline.optional "success" (Json.Decode.maybe (Json.Decode.map (\v -> v == "true") Json.Decode.string)) Nothing
+--        |> Json.Decode.Pipeline.optional "success" (Json.Decode.maybe (Json.Decode.map (\v -> v) Json.Decode.bool)) Nothing
