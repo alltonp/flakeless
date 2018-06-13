@@ -21,8 +21,7 @@ libraryDependencies ++= Seq(
 
   //TIP: no longer 'provided', to avoid rogue milestone releases
   "org.json4s"     %% "json4s-native" % "3.2.11"
-    exclude("joda-time", "joda-time")
-  ,
+    exclude("joda-time", "joda-time"),
 
   //test
   "org.scalatest" %% "scalatest" % "3.0.5" % "test"
@@ -30,9 +29,9 @@ libraryDependencies ++= Seq(
 
 sonatypeSettings
 
-publishTo <<= version { project_version ⇒
+publishTo := {
   val nexus = "https://oss.sonatype.org/"
-  if (project_version.trim.endsWith("SNAPSHOT"))
+  if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
