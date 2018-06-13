@@ -12952,9 +12952,9 @@ var _user$project$FlightReportCodec$decodeDataPointContext = A4(
 		A2(
 			_elm_lang$core$Json_Decode$map,
 			function (v) {
-				return _elm_lang$core$Native_Utils.eq(v, 'true');
+				return v;
 			},
-			_elm_lang$core$Json_Decode$string)),
+			_elm_lang$core$Json_Decode$bool)),
 	_elm_lang$core$Maybe$Nothing,
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,

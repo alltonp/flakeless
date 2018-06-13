@@ -8,6 +8,23 @@ import Dict as Dict
 import Date.Extra.Utils as DateUtils
 import Date exposing (..)
 
+----DataPoint is the thing ...
+----need to make it a tree
+--
+--type Tree
+--    = Tree Node
+--
+----TODO: so this becomes FlightDataRecord
+----TODO: can still have a list of DataPoint
+----TODO: copy level one should have suite
+----TODO: is it a tree? or a list of trees? - in which maatbe DataPoint has the child list
+--type alias Node =
+--    { name : String
+--    , children : List Tree
+--    }
+--
+--
+--
 type alias FlightDataRecord =
    { suite: String
    , test: String
@@ -89,4 +106,4 @@ decodeDataPointContext : Json.Decode.Decoder Context
 decodeDataPointContext =
     Json.Decode.Pipeline.decode Context
         |> Json.Decode.Pipeline.required "failures" (Json.Decode.list Json.Decode.string)
-        |> Json.Decode.Pipeline.optional "success" (Json.Decode.maybe (Json.Decode.map (\v -> v == "true") Json.Decode.string)) Nothing
+        |> Json.Decode.Pipeline.optional "success" (Json.Decode.maybe (Json.Decode.map (\v -> v) Json.Decode.bool)) Nothing
