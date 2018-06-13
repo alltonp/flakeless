@@ -20,19 +20,8 @@ libraryDependencies ++= Seq(
   "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
 
   //TIP: important these are NOT provided, so clients don't need to specify
-  "com.github.nscala-time" %% "nscala-time" % "2.18.0",
-  "im.mange"               %% "little"      % "0.0.57"
-
-  //TIP: shouldn't be needed now, come in from little instead
-//  "org.json4s"     %% "json4s-native" % "3.2.11"// % "provided"
-  //    exclude("org.scala-lang", "scala-compiler")
-  //    exclude("org.scala-lang", "scalap")
-//  exclude("joda-time", "joda-time")
-//  ,
-
-//  "org.json4s"     %% "json4s-ext"    % "3.2.11"// % "provided"
-//  exclude("joda-time", "joda-time")
-//  ,
+  "com.github.nscala-time" %% "nscala-time" % "2.20.0",
+  "im.mange"               %% "little"      % "0.0.59"
 )
 
 sonatypeSettings
