@@ -62,13 +62,40 @@ class ReportJsonSpec extends RefSpec {
                      |      "success":"false"
                      |    }
                      |  }]
-                     |}
-                     |""".stripMargin
+                     |}""".stripMargin
 
     val actual = FlightDataRecordJson.serialise(record)
 
-    println(s"\n\n$actual\n\n")
+//    println(s"\n\n$actual\n\n")
 
     assertResult(expected)(actual)
   }
+
+  def `jsonise Investigation`() = {
+    val investigation = Investigation(0, "suite", "test", true,
+      Some(DateTime.parse("2018-06-13T13:25:56.219Z")),
+      Some(DateTime.parse("2018-06-13T13:25:58.219Z")),
+      Some(DateTime.parse("2018-06-13T13:25:57.219Z")),
+      Some(4000),Some(2000),1)
+
+    val expected = """[{
+                     |  "flightNumber":0,
+                     |  "suite":"suite",
+                     |  "test":"test",
+                     |  "success":"true",
+                     |  "started":"2018-06-13T13:25:56.219Z",
+                     |  "finished":"2018-06-13T13:25:58.219Z",
+                     |  "firstInteraction":"2018-06-13T13:25:57.219Z",
+                     |  "grossDurationMillis":4000,
+                     |  "netDurationMillis":2000,
+                     |  "dataPointCount":1
+                     |}]""".stripMargin
+
+    val actual = InvestigationJson.serialise(List(investigation))
+
+//    println(s"\n\n$actual\n\n")
+
+    assertResult(expected)(actual)
+  }
+
 }
