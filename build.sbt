@@ -1,5 +1,5 @@
 import scala.util.Try
-
+import xerial.sbt.Sonatype._
 
 name := "flakeless"
 
@@ -32,11 +32,7 @@ libraryDependencies ++= Seq(
   ,
 
   "com.github.nscala-time" %% "nscala-time" % "2.18.0"// % "provided"//, 
-  
-  
-  
-  
-  
+
 )
 
 sonatypeSettings
