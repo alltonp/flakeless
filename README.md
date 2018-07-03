@@ -21,7 +21,7 @@
 - Read the [Migration Guide](src/example/scala/im/mange/flakeless/examples/MigrationGuide.scala)
 
 ### Sounds good, how do I start using flakeless on a new project?
-- Read the New Project Guide (coming soon)
+- Read the [New Project Guide](src/example/scala/im/mange/flakeless/examples/NewProjectGuide.scala)
 
 ### I'm using it, how do I better understand my test suite?
 - Read the Reports Guide (coming soon)
