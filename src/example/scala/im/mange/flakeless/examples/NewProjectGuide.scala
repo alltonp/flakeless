@@ -24,6 +24,8 @@ object NewProjectGuide extends App {
   Click(flakeless, By.id("search"))
   AssertElementTextEquals(flakeless, By.id("result-1"), "bar")
   AssertElementTextEquals(flakeless, By.id("result-2"), "baz")
+  //all primitives are in the im.mange.flakeless package
+  //if you need one that isn't supported please create an github issue
 
 
   //(4) always prefer element finding by 'id',
