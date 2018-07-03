@@ -16,6 +16,7 @@
 - No big bang migration, Flakeless lets you gradually migrate your tests one interaction at a time
 - Replace each browser action/assertion with one of Flakeless' simple [Tell Dont Ask](https://martinfowler.com/bliki/TellDontAsk.html) style [primitives](src/main/scala/im/mange/flakeless/)
 - Unable to find a primitive for X - raise an Issue
+- Gradually migrate from primitives to [Page Objects](https://martinfowler.com/bliki/PageObject.html) using FluentDriver
 
 ### Sounds good, how do I start eradicating my existing flaky tests?
 - Read the [Migration Guide](src/example/scala/im/mange/flakeless/examples/MigrationGuide.scala)
