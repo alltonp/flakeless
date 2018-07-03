@@ -4,61 +4,78 @@ import im.mange.flakeless._
 import org.openqa.selenium.{By, WebDriver, WebElement}
 
 object NewProjectGuide extends App {
-  //(1) in sbt - add dependencies
+  //(1) add sbt dependencies
 
   //"im.mange" %% "flakeless" % "latest-version" % "test"
   //"org.seleniumhq.selenium" %% "selenium-java" % "latest-version" % "test"
 
-  //(2) create your browser instance and wrap it in a flakless
+
+  //(2) create webdriver browser and wrap it in a flakeless
+
   val webDriver: WebDriver = ??? // e.g. new ChromeDriver()
   val config = Config(/* override any defaults here */)
   val flakeless = Flakeless(webDriver, config)
 
-  //given
-  val element: WebElement = ???
+
+  //(3) use flakeless primitives to control the browser, passing in your flakeless instance
+
+  Goto(flakeless, "http://foo.com/")
+  SendKeys(flakeless, By.id("search-terms"), clear = true, "foo")
+  Click(flakeless, By.id("search"))
+  AssertElementTextEquals(flakeless, By.id("result-1"), "bar")
+  AssertElementTextEquals(flakeless, By.id("result-2"), "baz")
 
 
-  //(1) Replace side effecting actions on webElements e.g. .click(), .sendKeys() with corresponding primitive Click(), SendKeys()
+  //(4) always prefer element finding by 'id',
+  //the only exception is asserting counts which should use 'class'
 
-    //unsafe
-    element.findElement(By.id("container")).click()
-    //safe
-    Click(element, By.id("container"))
-
-    //unsafe
-    element.findElement(By.id("container")).sendKeys("foo")
-    //safe
-    SendKeys(element, By.id("container"), clear = true, "foo")
+  AssertElementListCountEquals(flakeless, By.className("result"), 2)
 
 
-  //(2) Replace all state querying on webElements with corresponding assertions
+  //(5) if you have nested components use a 'Path' to locate them to avoid holding on to stale elements
+  // DO NOT use webdriver.findElement(), holding on to elements is the root of all evil
 
-    //unsafe
-    element.findElement(By.id("value")).getText == "expected"
-    //safe
-    AssertElementTextEquals(element, By.id("value"), "expected")
-
-    //unsafe
-    element.findElement(By.id("value")).getText.contains("contains")
-    //safe
-    AssertElementTextContains(element, By.id("value"), "contains")
+  val parentPath = Path(By.id("parent"))
+  Click(flakeless, parentPath.extend(By.id("child")))
+  //or
+  Click(flakeless, Path(By.id("parent"), By.id("child")))
 
 
-  //(3) Repeat (1) and (2) until there are no usages of .findElement and .findElements
+  //(6) use the Page Object pattern (https://martinfowler.com/bliki/PageObject.html) to evolve a test API
+  //extend FluentDriver to assist this - i.e. (3) and (4) above can be re-written as:
 
-  //(4) Stop holding onto webElements they could be stale, always start from webDriver, if nesting is required use a Path
+  case class FooDriver(flakeless: Flakeless) extends FluentDriver {
+    def open() = goto("http://foo.com/")
+    def enterTerms(value: String) = sendKeys(By.id("search-terms"), value, clear = true)
+    def clickSearch() = click(By.id("search"))
 
-    //unsafe
-    val parentElement = element.findElement(By.id("parent"))
-    val childElement = parentElement.findElement(By.id("child"))
-    childElement.click()
-    //safe
-    val parentPath = Path(By.id("parent"))
-    Click(webDriver, parentPath.extend(By.id("child")))
-    //or
-    Click(webDriver, Path(By.id("parent"), By.id("child")))
+    def assertResults(expected: List[ExpectedResult]) = {
+      assertElementListCountEquals(By.className("result"), expected.size)
+      expected.foreach(e => assertElementTextEquals(By.id(s"result-${e.id}"), e.value))
+    }
+  }
+
+  case class ExpectedResult(id: String, value: String)
+
+  FooDriver(flakeless)
+    .open()
+    .enterTerms("hello")
+    .clickSearch()
+    .assertResults(List(
+      ExpectedResult("1", "bar"),
+      ExpectedResult("2", "baz")
+    ))
 
 
-  //(5) That's it!
+  //(7) use flakeless reports to fix test failures and identify test performance bottlenecks
+  // see: Reporting Guide
+
+
+  //(8) if using scalatest, consider using https://github.com/alltonp/flakeless-scalatest
+  // this helps configure flakeless for running tests in parallel with multiple applications and browsers
+  // see: https://github.com/alltonp/flakeless-scalatest/blob/master/src/example/scala/im/mange/flakeless/scalatest/Example.scala
+
+
+  //(9) That's it!
 
 }
